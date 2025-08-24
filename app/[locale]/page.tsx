@@ -1,0 +1,39 @@
+// app/[locale]/page.tsx
+import Container from "@/components/Container"
+import Link from "next/link"
+import PostCard from "@/components/PostCard"
+import { allPosts } from "contentlayer/generated"
+import { getDict, type Locale } from "@/lib/dictionary"
+
+export default function Home({ params }: { params: { locale: Locale } }) {
+  const t = getDict(params.locale)
+  const posts = allPosts
+    .filter(p => !p.draft && (p as any).locale === params.locale)
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    .slice(0, 5)
+
+  return (
+    <Container>
+      <section className="py-14">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">{t.hero.title}</h1>
+        <p className="mt-3 text-lg text-gray-700 dark:text-gray-300 max-w-2xl">
+          {t.hero.subtitle}
+        </p>
+      </section>
+
+      <section className="py-6">
+        <h2 className="text-xl font-semibold mb-4">{t.latest}</h2>
+        <div className="grid gap-4">
+          {posts.map((p) => (
+            <PostCard key={(p as any).url} post={p as any} />
+          ))}
+        </div>
+        <div className="mt-6">
+          <Link href={`/${params.locale}/blog`} className="text-accent hover:underline">
+            {t.seeAll} →
+          </Link>
+        </div>
+      </section>
+    </Container>
+  )
+}
