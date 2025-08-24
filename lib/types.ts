@@ -43,7 +43,6 @@ export type CV = {
   highlights?: string[]
   experience: Experience[]
   education: Education[]
-  skills: string[]
   community?: Community[]
   ventures?: Venture[]
 }

@@ -6,10 +6,10 @@ import clsx from "clsx"
 type AProps = DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
 
 export const MDXComponents = {
-  center: ({ children, className, ...rest }: React.HTMLAttributes<HTMLDivElement>) => (
-    <div className={clsx("text-center", className)} {...rest}>
+  ImageCaption: ({ children }: { children: React.ReactNode }) => (
+    <span className="block text-center text-sm text-gray-500 dark:text-gray-400 my-4">
       {children}
-    </div>
+    </span>
   ),
 
   a: ({ href = "", children, className, target, rel, ...rest }: AProps) => {

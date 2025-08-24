@@ -39,7 +39,6 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
       community: "Contribuciones",
       ventures: "Emprendimientos",
       education: "Educación",
-      skills: "Habilidades",
       present: "Presente",
     },
     en: {
@@ -48,7 +47,6 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
       community: "Contributions",
       ventures: "Ventures",
       education: "Education",
-      skills: "Skills",
       present: "Present",
     },
   }[params.locale]
@@ -219,19 +217,6 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
               </li>
             ))}
           </ul>
-        </section>
-
-
-        {/* Skills */}
-        <section id="skills" className="mb-4">
-          <h2 className="text-xl font-semibold mb-3">{t.skills}</h2>
-          <div className="flex flex-wrap gap-2">
-            {data.skills.map((s, i) => (
-              <span key={i} className="rounded-full border px-2 py-1 text-xs">
-                {s}
-              </span>
-            ))}
-          </div>
         </section>
       </div>
     </Container>

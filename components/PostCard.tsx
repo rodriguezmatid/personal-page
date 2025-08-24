@@ -8,12 +8,12 @@ export default function PostCard({ post }: { post: Post }) {
       <h3 className="text-lg font-semibold">
         <Link href={post.url} className="hover:underline">{post.title}</Link>
       </h3>
-      <p className="mt-1 text-sm text-gray-500">{formatDate(post.date)}</p>
-      <p className="mt-3 text-gray-700">{post.summary}</p>
+      <p className="mt-1 text-sm text-gray-400 dark:text-gray-500">{formatDate(post.date)}</p>
+      <p className="mt-3 text-gray-600 dark:text-gray-300">{post.summary}</p>
       {post.tags?.length ? (
         <div className="mt-3 flex flex-wrap gap-2">
           {post.tags.map((t) => (
-            <span key={t} className="rounded-full border px-2 py-0.5 text-xs text-gray-600">{t}</span>
+            <span key={t} className="rounded-full border px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">{t}</span>
           ))}
         </div>
       ) : null}

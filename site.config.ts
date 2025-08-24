@@ -15,7 +15,6 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/rodriguezmatid/",
   },
 
-  // Opcional: datos para i18n y branding
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"] as const,
@@ -23,14 +22,26 @@ export const siteConfig = {
       es: "Portfolio minimalista, CV y artículos.",
       en: "Minimal portfolio, CV and articles.",
     },
+    nav: {
+      es: { blog: "Blog", about: "Sobre mí" },
+      en: { blog: "Blog", about: "About" },
+    },
+    latest: {
+      es: "Últimos artículos",
+      en: "Latest posts",
+    },
+    seeAll: {
+      es: "Ver todos",
+      en: "See all",
+    },
   },
 
   brand: {
     shortName: "Matías",
     accentColor: "#0ea5e9",
     tagline: {
-      es: "Quant · Developer · Actuario · MSc en Analytics",
-      en: "Quant · Developer · Actuary · MSc in Analytics",
+      es: "Quant · Developer · Actuario · MSc en Analytics + IA",
+      en: "Quant · Developer · Actuary · MSc in Analytics + AI",
     },
   },
 } as const

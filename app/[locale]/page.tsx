@@ -31,7 +31,7 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         </h1>
         {}
         {subtitle && (
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-sm text-gray-400 dark:text-gray-500">
             {subtitle}
           </p>
         )}
@@ -41,32 +41,6 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         </p>
 
         {}
-        {(me.community?.length || me.ventures?.length) ? (
-          <div className="mt-4 flex flex-wrap gap-2 text-sm">
-            {me.community?.map((c, i) => (
-              <a
-                key={`c-${i}`}
-                href={c.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border px-2 py-1 hover:underline"
-              >
-                {c.org}
-              </a>
-            ))}
-            {me.ventures?.map((v, i) => (
-              <a
-                key={`v-${i}`}
-                href={v.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border px-2 py-1 hover:underline"
-              >
-                {v.name}
-              </a>
-            ))}
-          </div>
-        ) : null}
       </section>
 
       {/* Latest posts */}

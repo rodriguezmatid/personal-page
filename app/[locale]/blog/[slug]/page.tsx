@@ -43,7 +43,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       <article className="py-10">
         <header className="mb-6">
           <h1 className="text-3xl font-bold">{post.title}</h1>
-          <p className="text-sm text-gray-500">{formatDate(post.date)}</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500">{formatDate(post.date)}</p>
         </header>
         <Prose>
           <MDX components={MDXComponents as any} />

@@ -1,10 +1,11 @@
 // lib/cv.ts
 import type { Locale, CV } from './types'
+import { siteConfig } from '@/site.config'
 
 export const cv: Record<Locale, CV> = {
   es: {
     name: "Matias Rodriguez",
-    headline: "Quant · Developer · Actuario · MSc en Analytics",
+    headline: siteConfig.brand.tagline.es,
     location: "Buenos Aires, AR",
     links: [
       { label: "GitHub", href: "https://github.com/rodriguezmatid" },
@@ -137,24 +138,11 @@ export const cv: Record<Locale, CV> = {
         url: "https://www.economicas.uba.ar/carreras/actuario/",
       },
     ],
-    skills: [
-      "Quant",
-      "Producto & Growth",
-      "Econometría/GLM",
-      "Experimentación",
-      "SQL",
-      "Python",
-      "Solidity",
-      "Next.js",
-      "Tailwind",
-      "APIs & ETL",
-      "Dashboards",
-    ],
   },
 
   en: {
     name: "Matias Rodriguez",
-    headline: "Quant · Developer · Actuary · MSc in Analytics",
+    headline: siteConfig.brand.tagline.en,
     location: "Buenos Aires, AR",
     links: [
       { label: "GitHub", href: "https://github.com/rodriguezmatid" },
@@ -286,19 +274,6 @@ export const cv: Record<Locale, CV> = {
         year: "2013–2019",
         url: "https://www.economicas.uba.ar/carreras/actuario/",
       },
-    ],
-    skills: [
-      "Quant",
-      "Product & Growth",
-      "Econometrics/GLM",
-      "Experimentation",
-      "SQL",
-      "Python",
-      "Solidity",
-      "Next.js",
-      "Tailwind",
-      "APIs & ETL",
-      "Dashboards",
     ],
   },
 }
