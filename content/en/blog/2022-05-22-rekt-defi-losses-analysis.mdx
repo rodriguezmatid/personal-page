@@ -1,0 +1,130 @@
+---
+title: "REKT: where DeFi projects lose funds (an analysis)"
+date: "2022-05-22"
+summary: "A quick dive into the REKT database: issues, networks, amounts lost, and why decentralization and bridge security matter."
+tags: ["defi", "security", "rekt", "smart-contracts", "analysis"]
+locale: "en"
+slug: "rekt-defi-losses-analysis"
+draft: false
+---
+
+In the world of blockchain and cryptocurrencies, rekt is the shorthand for suffering a severe financial loss. With the exponential growth of DeFi, a wave of “fast-food” scam projects emerged. But scams aren’t the only reason a project gets rekt: protocols can also harbor vulnerabilities in their smart contracts.
+I analyzed 100 representative incidents from the De.Fi “Rekt Database” (≈2,500 total). Amounts are in USD millions. Estimated total losses are about US$4,500M, while the 100-case sample covers US$4,336M. This sampling choice favors representativeness by value, but it may underweight the long tail of smaller incidents.
+
+## **How Projects Get Rekt: Four Drivers**
+1. **Exit Scam.** Malicious actions planned by a team intending to steal depositors’ and investors’ funds.
+2. **Flash Loans.** External attacks that manipulate prices and imbalances, leading to lender losses.
+3. **Smart Contract Exploits.** Internal or external vectors taking advantage of a vulnerability.
+4. **Access Control.** Compromised keys that drain wallets.
+
+## **Networks: Losses vs. Case Counts**
+
+By losses.
+
+![Reks issues by chain](/images/rekt/2.png)
+
+- **Ethereum** accounts for ~48% of total losses (≈ US$2,101M).
+- **Ronin** ranks second by value due to a single outsized event.
+- On **Ethereum**, category shares by value are substantial: exploits ≈51%, access-control ≈59%, and flash-loan ≈72% of the losses within each category across networks.
+- **Exit scams** skew toward other/smaller networks, which account for ~57% of exit-scam losses—evidence that scams often cluster on less-mature chains.
+
+By number of cases.
+
+- **Ethereum, BSC, and other/smaller networks** lead by count of incidents.
+
+- Within **exit scams**, **BSC** becomes more prominent by count, even if not by total value.
+
+Trends Over Time
+
+Since 2020, incident counts have risen across all categories.
+
+- The snapshot for **2022** may be incomplete if data collection was still underway at the time.
+
+- **Exploits** gained relative importance by value, while **exit scams** and **access-control** remained comparatively flat in value terms.
+
+Case Studies: The Biggest Rekt Events
+
+- **Ronin (≈US$624M).** Centralization of validator keys enabled an attacker to gather enough signatures (five validators) to approve fraudulent withdrawals—an acute governance and key-management failure.
+
+- **Poly Network.** A cross-chain permissioning flaw allowed privileged contracts to relay messages that invoked special-privilege functions. Systems that rely on privileged calls must ensure cross-chain relays cannot access those code paths.
+
+- **Wormhole (Solana, Feb 2022).** A bridge verification failure led to ETH being treated as deposited on Ethereum, allowing the attacker to mint the corresponding WETH on Solana.
+
+Takeaways
+
+Decentralization of key management and validator sets is non-negotiable.
+
+Bridge security and cross-chain permissioning matter as much as on-chain contract safety.
+
+Treat flash loans as a stress test: if a protocol breaks under them, the issue is in its logic or oracle design.
+
+![Reks issues by chain](/images/rekt/1.png)
+
+Using public sources (notably the REKT database), I pulled a subset of ~100 representative cases (~$4.336B out of the ~$4.5B total reported) and charted a few relationships.
+
+![Reks issues by chain](/images/rekt/2.png)
+<small>Values in millions of USD. Relationship between issue and network by **funds lost**.</small>
+
+**48%** of the total was on **Ethereum** (~$2.101B). **Ronin** appears second *by funds lost* despite having only one major incident.
+
+- On ETH, **Exploits**, **Access control**, and **Flash loans** represent ~**51%**, **59%**, and **72%** of total losses for those issue types respectively (by value).
+- “Other” networks lead **Exit scams** (~**57%**), aligning with the idea that many scams live on smaller chains.
+
+![Fund lost by issue and network percentage](/images/rekt/3.png)
+<small>Same relationship but by **number of cases**. ETH, BSC and “Other” networks lead the count. For exit scams, BSC becomes more relevant.</small>
+
+![Number of cases by issue and network](/images/rekt/4.png)
+![Distribution of issue by year](/images/rekt/5.png)
+![Percentage distribution of year by issue](/images/rekt/6.png)
+![Relationship between Issue and Network in terms of Quantity of Cases](/images/rekt/7.png)
+
+
+If we make the same analysis but with quantity of cases, ETH, BSC, and “another” networks lead this. And if we see the exit scam issue, BSC becomes important.
+
+
+Relationship between Issue and Network in terms of quantity of cases.
+Also, we can analyze what happens in terms of issues and years. The year 2022 could be not representative because isn’t full developed yet.
+
+
+We can see that since 2020, all the types of issues have been growing in terms of quantity.
+
+
+In special, the exploit issue, taking more importance than the others while Exit scam and access control remained fairly the same in terms of funds lost.
+
+
+Relationship between Issue and Network in terms of Quantity of Cases.
+
+Finally, a quick look at the **three biggest rekt events**:
+
+- **Ronin ($624M).** Related to validator **centralization**: the attacker obtained control over enough nodes (5) to authorize transactions.
+- **Poly Network.** **Permissioning** error: cross-chain relay contracts could call privileged contracts, allowing the attacker to escalate privileges.
+- **Wormhole (Solana).** A **bridge** exploit: the system was manipulated to credit ETH as deposited on Ethereum, enabling minting of WETH on Solana.
+
+### Takeaways
+
+- **Decentralization** is critical—especially for validator sets and critical ops.
+- **Bridge security** is as important as on-chain contract safety.
+- Defense in depth (key management, privilege separation, monitoring) is not optional in DeFi.
+
+<center>**Source:** https://defiyield.app/rekt-database</center>
+
+
+Using public sources (notably the REKT database), I pulled a subset of ~100 representative cases (~$4.336B out of the ~$4.5B total reported) and charted a few relationships.
+
+![Funds lost by issue and network](/images/rekt/1.png)
+<small>Values in millions of USD. Relationship between issue and network by **funds lost**.</small>
+
+**48%** of the total was on **Ethereum** (~$2.101B). **Ronin** appears second *by funds lost* despite having only one major incident.
+
+- On ETH, **Exploits**, **Access control**, and **Flash loans** represent ~**51%**, **59%**, and **72%** of total losses for those issue types respectively (by value).
+- “Other” networks lead **Exit scams** (~**57%**), aligning with the idea that many scams live on smaller chains.
+
+![Cases by issue and network](/images/rekt/cases-by-issue-network.png)
+<small>Same relationship but by **number of cases**. ETH, BSC and “Other” networks lead the count. For exit scams, BSC becomes more relevant.</small>
+
+What about **time**?
+
+![Issues by year](/images/rekt/issues-by-year.png)
+<small>Issues by year (counts). 2022 is partial in this dataset, but since 2020 all categories have grown in count.</small>
+
+Focusing on **funds lost over time** shows **exploits** gaining weight vs. exit scams/access control, which remain relatively stable.

@@ -6,10 +6,15 @@ import clsx from "clsx"
 type AProps = DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
 
 export const MDXComponents = {
+  center: ({ children, className, ...rest }: React.HTMLAttributes<HTMLDivElement>) => (
+    <div className={clsx("text-center", className)} {...rest}>
+      {children}
+    </div>
+  ),
+
   a: ({ href = "", children, className, target, rel, ...rest }: AProps) => {
     const klass = clsx("text-accent hover:underline", className)
 
-    // Links internos → Next Link
     if (href.startsWith("/")) {
       return (
         <Link href={href} className={klass}>
@@ -18,7 +23,6 @@ export const MDXComponents = {
       )
     }
 
-    // Externos → <a>
     return (
       <a
         href={href}
@@ -33,8 +37,7 @@ export const MDXComponents = {
   },
 
   img: (props: ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img {...props} className={clsx("rounded-xl", props.className)} />
+    <img {...props} className={clsx("rounded-xl max-w-full mx-auto block my-6", props.className)} />
   ),
 
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (

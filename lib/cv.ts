@@ -1,31 +1,7 @@
 // lib/cv.ts
-export type Locale = "en" | "es"
+import type { Locale, CV } from './types'
 
-type Experience = {
-  company: string
-  role: string
-  start: string
-  end: string | "Present"
-  bullets: string[]
-  url?: string
-}
-
-type Education = { school: string; degree: string; year: string; url?: string }
-
-export const cv: Record<
-  Locale,
-  {
-    name: string
-    headline: string
-    location?: string
-    links?: { label: string; href: string }[]
-    bio?: string
-    highlights?: string[]
-    experience: Experience[]
-    education: Education[]
-    skills: string[]
-  }
-> = {
+export const cv: Record<Locale, CV> = {
   es: {
     name: "Matias Rodriguez",
     headline: "Quant · Developer · Actuario · MSc en Analytics",
@@ -55,8 +31,9 @@ export const cv: Record<
         ],
       },
       {
-        company: "Universidad (Cátedra/Curso)",
-        role: "Profesor — Blockchain & DeFi (enfoque cuantitativo)",
+        company: "Universidad Torcuato Di Tella (UTDT)",
+        url: "https://www.utdt.edu/",
+        role: "Profesor — Blockchain & DeFi",
         start: "2023",
         end: "2024",
         bullets: [
@@ -127,14 +104,38 @@ export const cv: Record<
         ],
       },
     ],
+    community: [
+      {
+        org: "UTDT Blockchain Club",
+        role: "Colaborador",
+        url: "https://www.utdt.edu/ver_contenido.php?id_contenido=23244&id_item_menu=38519",
+        bullets: [
+          "Charlas y contenidos sobre DeFi y agentes on-chain; colaboración en research con estudiantes."
+        ]
+      }
+    ],
+    ventures: [
+      {
+        name: "Stayba",
+        url: "https://www.stayba.info/",
+        bullets: [
+          "Emprendimientos en Airbnb: pricing, ocupación y automatización de operaciones end-to-end."
+        ]
+      }
+    ],
     education: [
       {
         school: "Universidad Torcuato Di Tella (UTDT)",
-        degree: "M.Sc. en Analytics",
+        degree: "MiM+AI — Master in Management, Analytics and Artificial Intelligence",
         year: "2020–2022",
-        url: "https://www.utdt.edu/",
+        url: "https://www.utdt.edu/listado_contenidos.php?id_item_menu=25098",
       },
-      { school: "Universidad de Buenos Aires (UBA)", degree: "Actuario", year: "2013–2019" },
+      {
+        school: "Universidad de Buenos Aires (UBA)",
+        degree: "Actuario",
+        year: "2013–2019",
+        url: "https://www.economicas.uba.ar/carreras/actuario/",
+      },
     ],
     skills: [
       "Quant",
@@ -180,8 +181,9 @@ export const cv: Record<
         ],
       },
       {
-        company: "University (Course)",
-        role: "Lecturer — Blockchain & DeFi (quant focus)",
+        company: "Universidad Torcuato Di Tella (UTDT)",
+        url: "https://www.utdt.edu/",
+        role: "Lecturer — Blockchain & DeFi",
         start: "2023",
         end: "2024",
         bullets: [
@@ -252,14 +254,38 @@ export const cv: Record<
         ],
       },
     ],
+    community: [
+      {
+        org: "UTDT Blockchain Club",
+        role: "Core contributor",
+        url: "https://www.utdt.edu/ver_contenido.php?id_contenido=23244&id_item_menu=38519",
+        bullets: [
+          "Talks and content on DeFi and on-chain agents; research collaboration with students."
+        ]
+      }
+    ],
+    ventures: [
+      {
+        name: "Stayba",
+        url: "https://www.stayba.info/",
+        bullets: [
+          "Short-term rentals on Airbnb: pricing, occupancy and end-to-end ops automation."
+        ]
+      }
+    ],
     education: [
       {
-        school: "Universidad Torcuato Di Tella (UTDT)",
-        degree: "M.Sc. in Analytics",
+        school: "Torcuato Di Tella University (UTDT)",
+        degree: "MiM+AI — Master in Management, Analytics and Artificial Intelligence",
         year: "2020–2022",
-        url: "https://www.utdt.edu/",
+        url: "https://www.utdt.edu/listado_contenidos.php?id_item_menu=25098",
       },
-      { school: "University of Buenos Aires (UBA)", degree: "Actuary", year: "2013–2019" },
+      {
+        school: "Buenos Aires University (UBA)",
+        degree: "Actuary",
+        year: "2013–2019",
+        url: "https://www.economicas.uba.ar/carreras/actuario/",
+      },
     ],
     skills: [
       "Quant",
@@ -276,3 +302,4 @@ export const cv: Record<
     ],
   },
 }
+

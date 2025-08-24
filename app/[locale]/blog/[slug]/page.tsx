@@ -4,6 +4,7 @@ import Container from "@/components/Container"
 import Prose from "@/components/Prose"
 import { MDXComponents } from "@/components/MDXComponents"
 import { useMDXComponent } from "next-contentlayer/hooks"
+import { formatDate } from "@/lib/utils"
 
 export const dynamicParams = false
 
@@ -31,12 +32,18 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
   const MDX = useMDXComponent(post.body.code)
 
+  // Debug: log the date values
+  console.log('Post date:', post.date)
+  console.log('Post date type:', typeof post.date)
+  console.log('New Date(post.date):', new Date(post.date))
+  console.log('Formatted date:', new Date(post.date).toLocaleDateString("en-US"))
+
   return (
     <Container>
       <article className="py-10">
         <header className="mb-6">
           <h1 className="text-3xl font-bold">{post.title}</h1>
-          <p className="text-sm text-gray-500">{new Date(post.date).toLocaleDateString("es-AR")}</p>
+          <p className="text-sm text-gray-500">{formatDate(post.date)}</p>
         </header>
         <Prose>
           <MDX components={MDXComponents as any} />

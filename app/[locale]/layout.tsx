@@ -44,7 +44,7 @@ export default function LocaleLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <Header locale={locale} />
-      {/* Footer es fixed (h-16), reservamos espacio con pb-16 */}
+      {/* Footer is fixed (h-16), we reserve space with pb-16 */}
       <main className="flex-1 pb-16">{children}</main>
       <Footer />
     </div>

@@ -4,12 +4,12 @@ import PostCard from "@/components/PostCard"
 import { allPosts } from "contentlayer/generated"
 
 export default function BlogPage({ params }: { params: { locale: "en" | "es" } }) {
-  // 1) filtrar por idioma y no-draft
+  // 1) filter by language and not-draft
   const filtered = allPosts
     .filter(p => !p.draft && (p as any).locale === params.locale)
     .sort((a, b) => (a.date < b.date ? 1 : -1))
 
-  // 2) dedupe por slug (por si quedó algún duplicado accidental)
+  // 2) dedupe by slug (in case there's any accidental duplicate)
   const seen = new Set<string>()
   const posts = filtered.filter(p => {
     const key = (p as any).slug
