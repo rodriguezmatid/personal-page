@@ -10,8 +10,8 @@ export function generateMetadata({ params }: { params: { locale: Locale } }) {
   const title = params.locale === "es" ? "Sobre mí" : "About"
   const description =
     params.locale === "es"
-      ? "CV y trayectoria de Matías Rodríguez."
-      : "CV and background of Matías Rodríguez."
+      ? "CV y trayectoria de Matias Rodriguez."
+      : "CV and background of Matias Rodriguez."
 
   return {
     title,
@@ -67,7 +67,19 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
               <div key={i} className="rounded-2xl border p-4">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="font-medium">
-                    {e.role} · {e.company}
+                    {e.role} ·{" "}
+                    {"url" in e && e.url ? (
+                      <a
+                        href={e.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline-offset-2 hover:underline"
+                      >
+                        {e.company}
+                      </a>
+                    ) : (
+                      e.company
+                    )}
                   </h3>
                   <span className="text-xs text-gray-500">
                     {e.start} — {e.end}
@@ -85,21 +97,34 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
 
         {/* Education */}
         <section className="mb-10">
-          <h2 className="text-xl font-semibold mb-3">{t.education}</h2>
-          <ul className="grid gap-2 text-sm">
+        <h2 className="text-xl font-semibold mb-3">{t.education}</h2>
+        <ul className="grid gap-2 text-sm">
             {data.education.map((ed, i) => (
-              <li
+            <li
                 key={i}
                 className="rounded-2xl border p-4 flex items-center justify-between"
-              >
+            >
                 <div>
-                  {ed.degree} — {ed.school}
+                {ed.degree} —{" "}
+                {"url" in ed && ed.url ? (
+                    <a
+                    href={ed.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline-offset-2 hover:underline"
+                    >
+                    {ed.school}
+                    </a>
+                ) : (
+                    ed.school
+                )}
                 </div>
                 <span className="text-xs text-gray-500">{ed.year}</span>
-              </li>
+            </li>
             ))}
-          </ul>
+        </ul>
         </section>
+
 
         {/* Skills */}
         <section className="mb-4">

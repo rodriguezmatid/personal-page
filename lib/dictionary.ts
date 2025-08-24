@@ -3,8 +3,8 @@ export const dict = {
     es: {
       nav: { blog: "Blog", about: "Sobre mí" },
       hero: {
-        title: "Tu Nombre",
-        subtitle: "Emprendedor / Builder. CV, notas y proyectos.",
+        title: "Matias Rodriguez",
+        subtitle: "Quant · Developer · Actuario · MSc en Analytics",
       },
       latest: "Últimos artículos",
       seeAll: "Ver todos",
@@ -12,8 +12,8 @@ export const dict = {
     en: {
       nav: { blog: "Blog", about: "About" },
       hero: {
-        title: "Your Name",
-        subtitle: "Entrepreneur / Builder. CV, notes & projects.",
+        title: "Matias Rodriguez",
+        subtitle: "Quant · Developer · Actuary · MSc in Analytics",
       },
       latest: "Latest posts",
       seeAll: "See all",

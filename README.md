@@ -1,4 +1,4 @@
-# Matías Rodríguez — Blog
+# Matias Rodriguez — Blog
 
 Personal site built with Next.js and MDX, featuring a bilingual blog (ES/EN), dark/light theme, and optimized for Vercel deployment.
 

@@ -1,11 +1,11 @@
 // site.config.ts
 export const siteConfig = {
-  title: "Matías Rodríguez",
+  title: "Matias Rodriguez",
   description: "Portfolio minimalista, CV y artículos.",
-  url: "https://matiasrodriguez.com", // ← cambiá al dominio real
+  url: "https://mrodriguez.xyz",
 
   author: {
-    name: "Matías Rodríguez",
+    name: "Matias Rodriguez",
     email: "matias.demian.r@gmail.com",
   },
 
@@ -29,8 +29,8 @@ export const siteConfig = {
     shortName: "Matías",
     accentColor: "#0ea5e9",
     tagline: {
-      es: "Emprendedor / Builder. CV, notas y proyectos.",
-      en: "Entrepreneur / Builder. CV, notes & projects.",
+      es: "Quant · Developer · Actuario · MSc en Analytics",
+      en: "Quant · Developer · Actuary · MSc in Analytics",
     },
   },
 } as const
