@@ -1,0 +1,103 @@
+---
+title: "Entendiendo Boros: Cómo tradear funding rates en DeFi"
+date: "2025-08-25"
+summary: "."
+tags: ["defi", "pendle", "boros"]
+locale: "es"
+slug: "boros-tradear-funding-rates"
+draft: false
+---
+
+Los funding rates son un mecanismo fundamental en los mercados de futuros perpetuos, incluyendo plataformas como Hyperliquid o Binance Futures. A diferencia de los contratos de futuros tradicionales con fechas de vencimiento, los contratos perpetuos se pueden mantener indefinidamente, pero esto crea otro desafío.
+
+## **El problema que resuelven**
+
+Sin una fecha de vencimiento, los contratos perpetuos podrían alejarse del precio spot del activo subyacente. Los funding rates solucionan esto creando un sistema de incentivos financieros que mantiene los precios perpetuos anclados a los valores reales del mercado.
+
+### Cómo funcionan en la práctica
+
+Usemos los perpetuos de BTCUSDT como ejemplo:
+
+- **Cuando precio perpetuo > precio spot**: Los que tienen posiciones largas pagan funding a los cortos. Esto desincentiva las posiciones largas e incentiva los cortos, bajando el precio del contrato hacia el spot.
+- **Cuando precio perpetuo < precio spot**: Los que tienen posiciones cortas pagan funding a los que están en largo. Esto termina empujando el precio perpetuo hacia el nivel spot.
+
+Estos pagos ocurren con intervalos regulares (típicamente cada 8 horas), creando presión continua del mercado hacia el equilibrio de precios.
+
+A modo de ejemplo, en Hyperliquid, los funding rates se liquidan ***cada hora***, así que una tasa del 0.0025% (funding positivo) en el ejemplo anterior significaría que:
+
+- Un trader con una posición larga de $50,000 en ETHUSDT en Hyperliquid tendrá que pagar *$50,000 x 0.0025% = $1.25* cada hora (asumiendo que el funding rate se mantenga constante).
+
+**Muchos traders confían en los funding rates como indicador del sentimiento del mercado.** Por ejemplo, un funding rate positivo en ETHUSDT nos dice que hay más traders en posiciones largas, y que el mercado está alcista. Sin embargo, un funding rate *excesivamente* positivo ***puede*** indicar que ETH está sobrecomprado.
+
+## Presentando Boros: Tradeando los funding rates en sí mismo
+
+¿Alguna vez te preguntaste si podrías tradear la dirección que pensás que va a tomar un funding rate?
+
+Por ejemplo, ¿tenés una perspectiva alcista sobre ENA y esperás que más traders abran posiciones largas? Vas largo en el funding rate de ENA. ¿Pensás que ENA está sobrecomprado y los funding rates están muy altos? Vas corto en el funding rate de ENA.
+
+### ¿Qué es Boros?
+
+Boros es la plataforma de trading de yield de Pendle que permite el trading con margen de funding rates de múltiples fuentes, incluyendo exchanges centralizados. Los traders pueden tanto especular sobre la dirección del funding rate como cubrir su exposición existente a funding rates flotantes.
+
+!(/images/boros/1.png)
+
+## Cómo funciona Boros
+
+### 1. Unidad de tasa (YUs) - El mecanismo central
+
+Boros transforma los funding rates flotantes en instrumentos tradeables llamados **Yield Units (YUs)**. Cada YU representa el yield generado por 1 unidad del activo colateral subyacente. Esta tokenización permite a los traders comprar y vender exposición a los movimientos de funding rates como cualquier otro activo tradeable.
+
+### 2. Abriendo posiciones y APR fijo
+
+Para tradear en Boros, depositás colateral basado en la exposición del activo que querés. Cuando abrís una posición YU por primera vez, bloqueás el **APR implícito** actual como tu tasa fija, este se convierte en el APR que vas a pagar o recibir hasta el vencimiento. El APR implícito funciona esencialmente como el "precio" del YU, afectando directamente el valor de tu posición.
+
+### 3. Sistema de vault y liquidez
+
+Cada par YU en Boros tiene un **vault** correspondiente que proporciona liquidez adicional más allá del libro de órdenes tradicional. Cuando hacés una orden de mercado, puede ser matcheada con otros traders o con el  vault, haciendo que el mismo sea tu contraparte mientras gana fees e incentivos de PENDLE.
+
+Los depositantes del vault efectivamente toman una **posición sesgada en largo en YU**, beneficiándose de APRs implícitos altos o en alza. Sin embargo, si el APR implícito baja después del depósito (en especial desde un valor alto), las posiciones del vault pueden experimentar **pérdida impermanente (IL)**.
+
+!(/images/boros/2.png)
+
+## Entendiendo las posiciones YU: Fijo vs. Flotante
+
+### Cómo funciona el APR fijo
+
+Cuando abrís una posición, tu APR fijo se determina por el APR implícito promedio al momento de abrir. Este se convierte en tu tasa bloqueada por la duración de la posición.
+
+En cada liquidación, Boros compara la tasa de funding subyacente real contra tu tasa fija:
+
+### Posición YU Larga: Pagás fijo, recibís flotante
+
+- **Pagás**: Tu APR fijo
+- **Recibís**: La tasa de funding subyacente real
+- **Ganás cuando**: Tasa subyacente > Tasa fija
+
+*Ejemplo*: Abrís un YU largo al 12% de APR fijo. Si la tasa de funding subyacente está actualmente al 17%, recibís la diferencia del 5% (escalada al período de liquidación). Estás apostando a que las tasas de funding reales van a exceder tus pagos fijos.
+
+### Posición YU corta: Pagás flotante, recibís fijo
+
+- **Pagás**: La tasa de funding subyacente real
+- **Recibís**: Tu APR fijo
+- **Ganás cuando**: Tasa subyacente < Tasa fija
+
+*Ejemplo*: Abrís un YU corto al 15% de APR fijo. Si la tasa subyacente sube al 22%, perdés el 7% (escalado al período de liquidación) porque estás pagando más de lo que recibís. Estás apostando a que las tasas de funding reales van a mantenerse por debajo de tu tasa fija.
+
+## Fecha de vencimiento: Cuando terminan las posiciones
+
+Cada YU tiene una **fecha de vencimiento** predeterminada. Este es un concepto importante porque YU esencialmente representa el yield futuro de un activo durante un período específico de tiempo. El valor justo de cualquier posición YU es la suma de los pagos totales de yield que vas a recibir (o pagar) hasta esa fecha de vencimiento.
+
+A medida que te acercás al vencimiento, tu posición YU gradualmente realiza su valor a través de liquidaciones periódicas. Cada período de liquidación, recibís o pagás la diferencia entre las tasas fijas y flotantes, deshaciendo lentamente el potencial de tu posición.
+
+### Al vencimiento
+
+1. **El valor de la posición se vuelve cero** - Tu posición entera se ejecutó completamente a través de los pagos de liquidación a lo largo del tiempo
+2. **El colateral se libera completamente** - Todas las obligaciones de pago se liquidaron, y tu colateral depositado se libera
+
+Este sistema de vencimiento asegura que las posiciones YU tengan un punto final claro, a diferencia de los contratos perpetuos que teóricamente pueden correr indefinidamente. También significa que mientras más te acercás al vencimiento, menos valor temporal queda en tu posición.
+
+## Conclusión: Una nueva frontera en el trading DeFi
+
+Boros abre una dimensión de trading completamente nueva al hacer que los funding rates en sí mismos sean activos tradeables. Ya seas un trader buscando obtener ganancias de la volatilidad de los funding rates, o alguien que busca cubrir sus posiciones perpetuas existentes, Boros proporciona las herramientas para convertir los movimientos de funding rates en oportunidades estratégicas.
+
+A medida que DeFi continúa evolucionando, plataformas del estilo demuestran cómo los conceptos financieros tradicionales pueden ser reimaginados y tokenizados, creando nuevas formas de capturar valor de ineficiencias de mercado que anteriormente eran inaccesibles para traders individuales.
