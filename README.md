@@ -1,90 +1,122 @@
-# Matias Rodriguez — Blog
+# Matias Rodriguez — Personal Site
 
-Personal site built with Next.js and MDX, featuring a bilingual blog (ES/EN), dark/light theme, and optimized for Vercel deployment.
+Minimalist personal portfolio, blog, and CV. Built with Next.js 14, MDX, and Tailwind CSS. Bilingual (Spanish/English). Swiss/Brutalist design: monochrome, geometric typography, structural borders, no ornamentation.
 
-## ✨ Features
+**Maturity**: MVP — live at [mrodriguez.xyz](https://mrodriguez.xyz).
 
-- **Next.js (App Router)** + TypeScript
-- **MDX + Contentlayer** - Content versioned with git
-- **i18n by URL** - `/es` and `/en` (middleware + dynamic routes)
-- **Dark/Light theme** with next-themes
-- **Tailwind CSS** with @tailwindcss/typography
-- **SEO optimized** - Per-locale metadata, favicon/OG image
+## Architecture
 
-## 🧰 Tech Stack
+```
+app/
+  layout.tsx              Root layout (font, theme provider, global metadata)
+  globals.css             Base styles (pure black/white, selection inversion)
+  [locale]/
+    layout.tsx            Locale layout (header, footer, locale metadata)
+    page.tsx              Home — hero + latest posts
+    about/page.tsx        CV — experience, contributions, ventures, education
+    blog/page.tsx         Blog listing
+    blog/[slug]/page.tsx  Blog post (MDX rendered)
+  api/contact/route.ts    Contact form endpoint
+  rss/route.ts            RSS feed
+  sitemap.ts              Dynamic XML sitemap
+components/               UI components (Header, Footer, PostCard, ThemeToggle, etc.)
+content/
+  en/blog/                English blog posts (.mdx)
+  es/blog/                Spanish blog posts (.mdx)
+lib/
+  cv.ts                   Structured CV data (bilingual)
+  dictionary.ts           UI translation strings
+  types.ts                TypeScript type definitions
+  utils.ts                Date formatting utility
+```
 
-- **Next.js 14**, React 18, TypeScript 5
-- **Contentlayer 0.3**, MDX
-- **Tailwind CSS 3**, next-themes
-- **pnpm**
+Key architectural decisions:
+- **Static generation** via `force-static` and `generateStaticParams` — no runtime server rendering
+- **Custom i18n** via middleware locale detection — no external i18n library
+- **Contentlayer** processes MDX at build time into typed JSON
+- **Site config** (`site.config.ts`) is the single source of truth for all metadata and strings
 
-## 🔧 Requirements
+## Stack
 
-- Node 18 or 20
-- pnpm (`npm i -g pnpm`)
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS 3 + @tailwindcss/typography |
+| Content | Contentlayer + MDX |
+| Font | Space Grotesk (Google Fonts) |
+| Theme | next-themes (class-based dark mode) |
+| Icons | Lucide React |
+| Package manager | pnpm |
+| Deployment | Vercel |
 
-## 🚀 Getting Started
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm
+
+### Setup
+
+```bash
+git clone https://github.com/rodriguezmatid/personal-page.git
+cd personal-page
+pnpm install
+```
 
 ### Development
 
 ```bash
-pnpm install
 pnpm dev
 ```
 
-## 📝 Writing Posts
+Opens at `http://localhost:3000`. Redirects to `/es` or `/en` based on browser locale.
 
-Place posts in:
-- `content/en/blog/...`   # English
-- `content/es/blog/...`   # Spanish
+### Building
 
-### Front-matter
+```bash
+pnpm build
+```
+
+### Linting
+
+```bash
+pnpm lint
+```
+
+## Content
+
+Blog posts are MDX files in `content/{locale}/blog/`. Frontmatter format:
 
 ```yaml
 ---
-title: "Your Post Title"
-date: "2025-01-01"
-summary: "Brief description"
+title: "Post Title"
+date: "2025-01-15"
+summary: "One-line description."
 tags: ["tag1", "tag2"]
 draft: false
 ---
 ```
 
-## 🌍 Internationalization
+CV data is in `lib/cv.ts` — structured TypeScript, not markdown.
 
-- Middleware redirects `/` → `/{locale}` based on browser language
-- UI strings in `lib/dictionary.ts`
-- Pages under `app/[locale]/...`
+Translation strings are in `site.config.ts` and `lib/dictionary.ts`.
 
-## 🏷️ Configuration
+## Deployment
 
-Edit `site.config.ts` for site metadata:
+Deployed to Vercel with zero configuration. Push to `main` triggers automatic build and deploy.
 
-```typescript
-{
-  title: "Your Site Title",
-  description: "Your description",
-  url: "https://yoursite.com",
-  author: "Your Name"
-}
+```bash
+pnpm build   # Vercel runs this automatically
 ```
 
-## ☁️ Deploy to Vercel
+No environment variables are required for the static site build.
 
-1. Push to GitHub
-2. Import in Vercel
-3. Build settings: `pnpm install` / `pnpm build`
+## Agent Operations
 
-## 📁 Structure
+This repository uses AI coding agents as part of its development workflow. Agent behavior is governed by [`AGENTS.md`](./AGENTS.md), which defines execution rules, quality gates, and security constraints. Agents operating in this repository must read and follow `AGENTS.md` before taking any action.
 
-```
-app/[locale]/          # Pages (en/es)
-components/            # React components
-content/en|es/blog/    # MDX posts
-lib/                   # Utilities
-public/                # Static assets
-```
+## License
 
-## 📄 License
-
-MIT — free to use and remix.
+No license file detected. All rights reserved unless otherwise specified.

@@ -1,3 +1,7 @@
 export default function Prose({ children }: { children: React.ReactNode }) {
-  return <article className="prose prose-gray max-w-none dark:prose-invert">{children}</article>
+  return (
+    <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:underline prose-a:font-medium prose-pre:rounded-none prose-img:rounded-none">
+      {children}
+    </div>
+  )
 }

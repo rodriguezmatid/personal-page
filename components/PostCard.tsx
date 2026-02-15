@@ -4,19 +4,18 @@ import { formatDate } from "@/lib/utils"
 
 export default function PostCard({ post }: { post: Post }) {
   return (
-    <article className="group rounded-2xl border border-gray-200 p-5 transition hover:shadow-sm">
-      <h3 className="text-lg font-semibold">
-        <Link href={post.url} className="hover:underline">{post.title}</Link>
-      </h3>
-      <p className="mt-1 text-sm text-gray-400 dark:text-gray-500">{formatDate(post.date)}</p>
-      <p className="mt-3 text-gray-600 dark:text-gray-300">{post.summary}</p>
-      {post.tags?.length ? (
-        <div className="mt-3 flex flex-wrap gap-2">
-          {post.tags.map((t) => (
-            <span key={t} className="rounded-full border px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">{t}</span>
-          ))}
-        </div>
-      ) : null}
+    <article className="py-4 border-b border-neutral-200 dark:border-neutral-800 last:border-b-0">
+      <Link href={post.url} className="block group">
+        <p className="text-xs uppercase tracking-widest text-neutral-500">
+          {formatDate(post.date)}
+        </p>
+        <h3 className="mt-1 font-bold group-hover:underline">
+          {post.title}
+        </h3>
+        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          {post.summary}
+        </p>
+      </Link>
     </article>
   )
 }

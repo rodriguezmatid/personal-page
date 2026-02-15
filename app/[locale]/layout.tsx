@@ -6,13 +6,17 @@ import { siteConfig } from "@/site.config"
 
 type Locale = "en" | "es"
 
-export async function generateMetadata(
-  { params: { locale } }: { params: { locale: Locale } }
-): Promise<Metadata> {
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "es" }]
+}
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> {
   const desc =
     siteConfig.i18n?.metaDescription?.[locale] ?? siteConfig.description
-
-  const ogLocale = locale === "es" ? "es_AR" : "en_US"
 
   return {
     description: desc,
@@ -22,7 +26,7 @@ export async function generateMetadata(
       url: `${siteConfig.url}/${locale}`,
       siteName: siteConfig.title,
       images: [{ url: "/og.png", width: 1200, height: 630 }],
-      locale: ogLocale,
+      locale: locale === "es" ? "es_AR" : "en_US",
       type: "website",
     },
     twitter: {
@@ -44,8 +48,7 @@ export default function LocaleLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <Header locale={locale} />
-      {/* Footer is fixed (h-16), we reserve space with pb-16 */}
-      <main className="flex-1 pb-16">{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
   )

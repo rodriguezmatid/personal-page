@@ -1,11 +1,11 @@
 // app/layout.tsx
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Space_Grotesk } from "next/font/google"
 import { siteConfig } from "@/site.config"
 import ThemeProvider from "@/components/ThemeProvider"
 
-const inter = Inter({ subsets: ["latin"] })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -27,7 +27,6 @@ export const metadata: Metadata = {
       { url: "/favicon.ico" },
     ],
     apple: "/apple-touch-icon.png",
-    other: [{ rel: "mask-icon", url: "/safari-pinned-tab.svg", color: siteConfig.brand?.accentColor ?? "#0ea5e9" }],
   },
   openGraph: {
     title: siteConfig.title,
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang={siteConfig.i18n?.defaultLocale ?? "es"} suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`${spaceGrotesk.className} min-h-screen flex flex-col`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

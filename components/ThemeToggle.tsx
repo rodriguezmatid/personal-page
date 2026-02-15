@@ -1,23 +1,22 @@
 "use client"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { Moon, Sun } from "lucide-react"
 
 export default function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
 
-  const isDark = resolvedTheme === "dark"
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return <span className="inline-block w-8" />
+
   return (
     <button
-      aria-label="Toggle dark mode"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-full border px-2 py-1 text-sm"
-      title={isDark ? "Light" : "Dark"}
+      aria-label="Toggle theme"
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      className="hover:line-through"
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {resolvedTheme === "dark" ? "LHT" : "DRK"}
     </button>
   )
 }

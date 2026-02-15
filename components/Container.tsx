@@ -1,3 +1,3 @@
 export default function Container({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-0">{children}</div>
+  return <div className="max-w-xl mx-auto px-6">{children}</div>
 }

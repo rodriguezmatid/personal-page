@@ -4,18 +4,13 @@ import Link from "next/link"
 import PostCard from "@/components/PostCard"
 import { allPosts } from "contentlayer/generated"
 import { getDict, type Locale } from "@/lib/dictionary"
-import { cv } from "@/lib/cv"
 import { siteConfig } from "@/site.config"
 
 export const dynamic = "force-static"
 
 export default function Home({ params }: { params: { locale: Locale } }) {
   const t = getDict(params.locale)
-  const me = cv[params.locale]
-  const subtitle =
-    (siteConfig as any).i18n?.subtitle?.[params.locale] ??
-    (siteConfig as any).subtitle ??
-    ""
+  const tagline = siteConfig.brand?.tagline?.[params.locale] ?? ""
 
   const posts = allPosts
     .filter((p) => !p.draft && (p as any).locale === params.locale)
@@ -24,36 +19,37 @@ export default function Home({ params }: { params: { locale: Locale } }) {
 
   return (
     <Container>
-      {/* Introduction */}
-      <section className="py-14">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+      {/* Hero */}
+      <section className="py-20">
+        <h1 className="text-4xl font-bold tracking-tight">
           {t.hero.title}
         </h1>
-        {}
-        {subtitle && (
-          <p className="mt-1 text-sm text-gray-400 dark:text-gray-500">
-            {subtitle}
+        {tagline && (
+          <p className="mt-3 text-sm uppercase tracking-widest text-neutral-500">
+            {tagline}
           </p>
         )}
-        {}
-        <p className="mt-3 text-lg text-gray-700 dark:text-gray-300 max-w-2xl">
+        <p className="mt-6 leading-relaxed text-neutral-600 dark:text-neutral-400">
           {t.hero.subtitle}
         </p>
-
-        {}
       </section>
 
-      {/* Latest posts */}
-      <section className="py-6">
-        <h2 className="text-xl font-semibold mb-4">{t.latest}</h2>
-        <div className="grid gap-4">
+      {/* Posts */}
+      <section className="pb-20">
+        <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-500 pb-3 border-b border-black dark:border-white mb-6">
+          {t.latest}
+        </h2>
+        <div>
           {posts.map((p) => (
             <PostCard key={(p as any).url} post={p as any} />
           ))}
         </div>
         <div className="mt-6">
-          <Link href={`/${params.locale}/blog`} className="text-accent hover:underline">
-            {t.seeAll} →
+          <Link
+            href={`/${params.locale}/blog`}
+            className="text-xs uppercase tracking-widest hover:line-through"
+          >
+            {t.seeAll} &rarr;
           </Link>
         </div>
       </section>

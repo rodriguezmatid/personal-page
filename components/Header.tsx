@@ -2,7 +2,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import ThemeToggle from "./ThemeToggle"
-import { Home } from "lucide-react"
 
 export default function Header({ locale }: { locale: "en" | "es" }) {
   const pathname = usePathname() || `/${locale}`
@@ -10,8 +9,8 @@ export default function Header({ locale }: { locale: "en" | "es" }) {
   const swap = pathname.replace(/^\/(en|es)(?=\/|$)/, `/${other}`)
 
   const t = {
-    es: { blog: "Blog", about: "Sobre mí", lang: "EN", home: "Inicio" },
-    en: { blog: "Blog", about: "About",   lang: "ES", home: "Home"  },
+    es: { blog: "Blog", about: "Sobre mí", lang: "EN" },
+    en: { blog: "Blog", about: "About", lang: "ES" },
   }[locale]
 
   function rememberLocale() {
@@ -19,28 +18,38 @@ export default function Header({ locale }: { locale: "en" | "es" }) {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-gray-100 dark:bg-gray-950/70 dark:border-gray-800">
-      <div className="h-14 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        {}
+    <header className="border-b border-black dark:border-white">
+      <nav className="max-w-xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href={`/${locale}`}
-          aria-label={t.home}
-          className="rounded-full border px-2 py-0.5 flex items-center gap-1 hover:bg-gray-50 dark:hover:bg-gray-900"
+          className="text-sm font-bold uppercase tracking-widest"
         >
-          <Home className="h-4 w-4" />
-          <span className="sr-only">{t.home}</span>
+          MR
         </Link>
 
-        {}
-        <nav className="flex items-center gap-3 text-sm">
-          <Link href={`/${locale}/blog`} className="hover:underline">{t.blog}</Link>
-          <Link href={`/${locale}/about`} className="hover:underline">{t.about}</Link>
-          <Link href={swap} onClick={rememberLocale} className="rounded-full border px-2 py-0.5">
+        <div className="flex items-center gap-5 text-xs uppercase tracking-widest">
+          <Link
+            href={`/${locale}/blog`}
+            className="hover:line-through"
+          >
+            {t.blog}
+          </Link>
+          <Link
+            href={`/${locale}/about`}
+            className="hover:line-through"
+          >
+            {t.about}
+          </Link>
+          <Link
+            href={swap}
+            onClick={rememberLocale}
+            className="hover:line-through"
+          >
             {t.lang}
           </Link>
           <ThemeToggle />
-        </nav>
-      </div>
+        </div>
+      </nav>
     </header>
   )
 }

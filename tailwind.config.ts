@@ -8,11 +8,7 @@ const config: Config = {
     "./content/**/*.{md,mdx}"
   ],
   theme: {
-    extend: {
-      colors: {
-        accent: { DEFAULT: "#0ea5e9" }
-      }
-    },
+    extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
 }

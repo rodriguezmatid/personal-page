@@ -53,45 +53,57 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
 
   return (
     <Container>
-      <div className="py-10">
+      <div className="py-20">
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-extrabold tracking-tight">{t.about}</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">{data.headline}</p>
+        <header className="mb-16">
+          <h1 className="text-4xl font-bold tracking-tight">
+            {t.about}
+          </h1>
+          <p className="mt-6 leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {data.headline}
+          </p>
           {data.location && (
-            <p className="text-sm text-gray-500 dark:text-gray-400">{data.location}</p>
+            <p className="mt-2 text-xs uppercase tracking-widest text-neutral-500">
+              {data.location}
+            </p>
           )}
         </header>
 
         {/* Experience */}
-        <section id="experience" className="mb-10">
-          <h2 className="text-xl font-semibold mb-3">{t.experience}</h2>
-          <div className="grid gap-4">
+        <section className="mb-16">
+          <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-500 pb-3 border-b border-black dark:border-white mb-6">
+            {t.experience}
+          </h2>
+          <div className="space-y-8">
             {data.experience.map((e, i) => (
-              <div key={i} className="rounded-2xl border p-4">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-medium">
-                    {e.role} ·{" "}
+              <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-6 last:border-b-0">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <h3 className="font-bold">
+                    {e.role}
+                    <span className="text-neutral-400"> — </span>
                     {"url" in e && e.url ? (
                       <a
                         href={e.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline-offset-2 hover:underline"
+                        className="font-normal underline hover:no-underline"
                       >
                         {e.company}
                       </a>
                     ) : (
-                      e.company
+                      <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                        {e.company}
+                      </span>
                     )}
                   </h3>
-                  <span className="text-xs text-gray-500">
-                    {e.start}{e.end ? ` — ${e.end}` : ""}
+                  <span className="text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap">
+                    {e.start}
+                    {e.end ? ` — ${e.end}` : ""}
                   </span>
                 </div>
-                <ul className="mt-2 list-disc pl-5 text-sm text-gray-700 dark:text-gray-300">
+                <ul className="mt-3 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
                   {e.bullets.map((b, j) => (
-                    <li key={j}>{b}</li>
+                    <li key={j}>— {b}</li>
                   ))}
                 </ul>
               </div>
@@ -101,37 +113,44 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
 
         {/* Contributions */}
         {data.community && data.community.length > 0 && (
-          <section id="contributions" className="mb-10">
-            <h2 className="text-xl font-semibold mb-3">{t.community}</h2>
-            <div className="grid gap-4">
+          <section className="mb-16">
+            <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-500 pb-3 border-b border-black dark:border-white mb-6">
+              {t.community}
+            </h2>
+            <div className="space-y-8">
               {data.community.map((c, i) => (
-                <div key={i} className="rounded-2xl border p-4">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="font-medium">
-                      {c.role} ·{" "}
+                <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-6 last:border-b-0">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                    <h3 className="font-bold">
+                      {c.role}
+                      <span className="text-neutral-400"> — </span>
                       {"url" in c && c.url ? (
                         <a
                           href={c.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="underline-offset-2 hover:underline"
+                          className="font-normal underline hover:no-underline"
                         >
                           {c.org}
                         </a>
                       ) : (
-                        c.org
+                        <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                          {c.org}
+                        </span>
                       )}
                     </h3>
                     {(c.start || c.end) && (
-                      <span className="text-xs text-gray-500">
-                        {c.start ?? ""}{c.start && c.end ? " — " : ""}{c.end ?? t.present}
+                      <span className="text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap">
+                        {c.start ?? ""}
+                        {c.start && c.end ? " — " : ""}
+                        {c.end ?? t.present}
                       </span>
                     )}
                   </div>
                   {c.bullets && c.bullets.length > 0 && (
-                    <ul className="mt-2 list-disc pl-5 text-sm text-gray-700 dark:text-gray-300">
+                    <ul className="mt-3 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
                       {c.bullets.map((b, j) => (
-                        <li key={j}>{b}</li>
+                        <li key={j}>— {b}</li>
                       ))}
                     </ul>
                   )}
@@ -141,39 +160,50 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
           </section>
         )}
 
-        {/* Startups */}
+        {/* Ventures */}
         {data.ventures && data.ventures.length > 0 && (
-          <section id="startups" className="mb-10">
-            <h2 className="text-xl font-semibold mb-3">{t.ventures}</h2>
-            <div className="grid gap-4">
+          <section className="mb-16">
+            <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-500 pb-3 border-b border-black dark:border-white mb-6">
+              {t.ventures}
+            </h2>
+            <div className="space-y-8">
               {data.ventures.map((v, i) => (
-                <div key={i} className="rounded-2xl border p-4">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="font-medium">
+                <div key={i} className="border-b border-neutral-200 dark:border-neutral-800 pb-6 last:border-b-0">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                    <h3 className="font-bold">
                       {"url" in v && v.url ? (
                         <a
                           href={v.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="underline-offset-2 hover:underline"
+                          className="underline hover:no-underline"
                         >
                           {v.name}
                         </a>
                       ) : (
                         v.name
                       )}
-                      {v.role ? <> — {v.role}</> : null}
+                      {v.role && (
+                        <>
+                          <span className="text-neutral-400"> — </span>
+                          <span className="font-normal text-neutral-600 dark:text-neutral-400">
+                            {v.role}
+                          </span>
+                        </>
+                      )}
                     </h3>
                     {(v.start || v.end) && (
-                      <span className="text-xs text-gray-500">
-                        {v.start ?? ""}{v.start && v.end ? " — " : ""}{v.end ?? t.present}
+                      <span className="text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap">
+                        {v.start ?? ""}
+                        {v.start && v.end ? " — " : ""}
+                        {v.end ?? t.present}
                       </span>
                     )}
                   </div>
                   {v.bullets && v.bullets.length > 0 && (
-                    <ul className="mt-2 list-disc pl-5 text-sm text-gray-700 dark:text-gray-300">
+                    <ul className="mt-3 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
                       {v.bullets.map((b, j) => (
-                        <li key={j}>{b}</li>
+                        <li key={j}>— {b}</li>
                       ))}
                     </ul>
                   )}
@@ -184,20 +214,21 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
         )}
 
         {/* Education */}
-        <section id="education" className="mb-10">
-          <h2 className="text-xl font-semibold mb-3">{t.education}</h2>
-          <ul className="grid gap-2 text-sm">
+        <section>
+          <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-500 pb-3 border-b border-black dark:border-white mb-6">
+            {t.education}
+          </h2>
+          <div className="space-y-6">
             {data.education.map((ed, i) => (
-              <li key={i} className="rounded-2xl border p-4">
-                {/* 1ª line: degree (link) + year aligned to the right */}
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-medium">
+              <div key={i}>
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <h3 className="font-bold">
                     {"url" in ed && ed.url ? (
                       <a
                         href={ed.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline-offset-2 hover:underline"
+                        className="underline hover:no-underline"
                       >
                         {ed.degree}
                       </a>
@@ -205,18 +236,16 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
                       ed.degree
                     )}
                   </h3>
-                  <span className="text-xs text-gray-500 whitespace-nowrap">
+                  <span className="text-xs uppercase tracking-widest text-neutral-500 whitespace-nowrap">
                     {ed.year}
                   </span>
                 </div>
-
-                {/* 2ª line: university (no link) */}
-                <div className="mt-1 text-gray-600 dark:text-gray-300">
+                <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
                   {ed.school}
-                </div>
-              </li>
+                </p>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
       </div>
     </Container>
